@@ -1,0 +1,34 @@
+{
+  "session": "./src/games/forca/database/session-120363418035012328@g.us.json",
+  "word": "hipótese",
+  "tema": "Ciência",
+  "dica": "Suposição inicial que pode ser testada e verificada.",
+  "acertos": 1,
+  "erros": 1,
+  "ended": false,
+  "win": false,
+  "usado": [
+    "a",
+    "o"
+  ],
+  "letrasY": [
+    "h",
+    "i",
+    "p",
+    "o",
+    "t",
+    "e",
+    "s",
+    "e"
+  ],
+  "letrasX": [
+    "_",
+    "_",
+    "_",
+    "o",
+    "_",
+    "_",
+    "_",
+    "_"
+  ]
+}

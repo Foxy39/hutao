@@ -1,0 +1,41 @@
+{
+  "session": "./src/games/forca/database/session-120363419509892331@g.us.json",
+  "word": "cinemática",
+  "tema": "Física",
+  "dica": "Estudo do movimento de objetos sem considerar as forças envolvidas.",
+  "acertos": 2,
+  "erros": 3,
+  "ended": false,
+  "win": false,
+  "usado": [
+    "g",
+    "r",
+    "e",
+    "p",
+    "n"
+  ],
+  "letrasY": [
+    "c",
+    "i",
+    "n",
+    "e",
+    "m",
+    "a",
+    "t",
+    "i",
+    "c",
+    "a"
+  ],
+  "letrasX": [
+    "_",
+    "_",
+    "n",
+    "e",
+    "_",
+    "_",
+    "_",
+    "_",
+    "_",
+    "_"
+  ]
+}
