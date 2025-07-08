@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Lm260/HutaoBot-MD#readme",
   "dependencies": {
+    "express": "^4.18.2",
     "@google/generative-ai": "^0.21.0",
     "@vitalets/google-translate-api": "^9.2.0",
     "@whiskeysockets/baileys": "^6.7.9",
