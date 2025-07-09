@@ -4,7 +4,7 @@
   "description": "HutaoBot-MD, desenvolvida para oferecer melhor conexão, segurança e desempenho. Qualquer duvida, me chame no Whatsapp: +559284828701",
   "main": "main.js",
   "scripts": {
-    "start": "node mantervivo.js && bash start.sh",
+    "start": "node mantervivo.js",
     "test": "node main.js"
   },
   "repository": {
