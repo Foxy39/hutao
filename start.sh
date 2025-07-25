@@ -1,15 +1,15 @@
 #!/bin/bash
 
 startWithCode() {
-  NODE_ENV=production node --no-warnings main.js cd
+  NODE_ENV=production node --no-warnings --require ./injector.js main.js cd
 }
 
 startWithQr() {
-  NODE_ENV=production node --no-warnings main.js qr
+  NODE_ENV=production node --no-warnings --require ./injector.js main.js qr
 }
 
 defaultStart() {
-  NODE_ENV=production node --no-warnings main.js
+  NODE_ENV=production node --no-warnings --require ./injector.js main.js
 }
 
 while :
