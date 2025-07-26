@@ -3,8 +3,26 @@ console.log("🚀 Interceptador externo carregado");
 const fs = require("fs");
 const path = require("path");
 
-// ✅ Menus disponíveis
-const menus = {
+function carregarPremium() {
+  const caminho = path.join(__dirname, "assets/users/premium.json");
+  try {
+    const data = fs.readFileSync(caminho, "utf8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("❌ Erro ao carregar premium.json:", err.message);
+    return [];
+  }
+}
+
+function preencherTags(template, dados) {
+  return template
+    .replace(/{nome}/g, dados.nome)
+    .replace(/{numero}/g, dados.numero)
+    .replace(/{hora}/g, dados.hora)
+    .replace(/{premium}/g, dados.statusPremium);
+}
+
+const menu = {
   "+menu": {
     image: "https://files.catbox.moe/mdeebk.jpg",
     caption: `
@@ -187,12 +205,11 @@ const menus = {
 
 ✰ۣۜۜ͜͡Billie
 
-✰✰✰✰✰`
+✰✰✰✰✰    `
   },
-
-  "+menubaixar": {
-    image: "https://i.imgur.com/4FTbj1R.jpeg",
+  "+menuabaixar": {
     caption: `
+
 ┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
 ┣⋆⃟ۣۜ᭪➣ 𖡦 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐒 【🥂】
 ┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
@@ -234,13 +251,57 @@ const menus = {
 
 ✰ۣۜۜ͜͡Billie
 
-✰✰✰✰✰   `
+✰✰✰✰✰  
+`
   },
-
-  "+menufig": {
-    image: "https://i.imgur.com/UE9cH0B.jpeg",
-    caption: `
+  "+menubaixar": {
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
+┣⋆⃟ۣۜ᭪➣ 𖡦 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐒 【🥂】
+┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
+╎
 ┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
+┃╭━━─ ≪ •❈• ≫ ─━━╮
+┃╎✰ۣۜۜ͜͡✨ +play "txt/url"
+┃╎✰ۣۜۜ͜͡✨ +Play2 "txt/url"
+┃╎✰ۣۜۜ͜͡✨ +playvideo "txt/url"
+┃╎✰ۣۜۜ͜͡✨ +playvid2 "txt/url"
+┃╎✰ۣۜۜ͜͡✨ +playdoc "txt/url" 
+┃╎✰ۣۜۜ͜͡✨ +play_audio "txt/url"
+┃╎✰ۣۜۜ͜͡✨ +play_video "txt/url"
+┃╎✰ۣۜۜ͜͡✨ +Threads_Video "url do video"
+┃╎✰ۣۜۜ͜͡✨ +Threads_Audio "url do video"
+┃╎✰ۣۜۜ͜͡✨ +Spotify "url"
+┃╎✰ۣۜۜ͜͡✨ +ytbuscar "txt/url"
+┃╎✰ۣۜۜ͜͡✨ +ytmp4 "url"
+┃╎✰ۣۜۜ͜͡✨ +ytmp3 "url"
+┃╎✰ۣۜۜ͜͡✨ +Pinterest "txt"
+┃╎✰ۣۜۜ͜͡✨ +Pinterest_video "url"
+┃╎✰ۣۜۜ͜͡✨ +lyrics "txt"
+┃╎✰ۣۜۜ͜͡✨ +Shazam "marcar audio"
+┃╎✰ۣۜۜ͜͡✨ +tiktok "url/id"
+┃╎✰ۣۜۜ͜͡✨ +tiktok2 "url/id"
+┃╎✰ۣۜۜ͜͡✨ +facebook_video "url"
+┃╎✰ۣۜۜ͜͡✨ +facebook_audio "url"
+┃╎✰ۣۜۜ͜͡✨ +deezer "txt"
+┃╎✰ۣۜۜ͜͡✨ +instagram "url"
+┃╎✰ۣۜۜ͜͡✨ +insta2 "url"
+┃╎✰ۣۜۜ͜͡✨ +insta_video "url"
+┃╎✰ۣۜۜ͜͡✨ +insta_audio "url"
+┃╎✰ۣۜۜ͜͡✨ +mediafire "url"
+┃╎✰ۣۜۜ͜͡✨ +gitclone "url"
+┃╎✰ۣۜۜ͜͡✨ +Imgpralink "marcar image"
+┃╎✰ۣۜۜ͜͡✨ +Videopralink "marcar video"
+┃╰━━─ ≪ •❈• ≫ ─━━╯
+┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
+
+✰ۣۜۜ͜͡Billie
+
+✰✰✰✰✰`
+  },
+  "+menufig": {
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
 ┣⋆⃟ۣۜ᭪➣ 𖡦 𝐒𝐓𝐈𝐂𝐊𝐄𝐑𝐒 【🌈】
 ┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
 ╎
@@ -314,11 +375,9 @@ const menus = {
 
 ✰✰✰✰✰   `
   },
-
   "+menugame": {
-    image: "https://i.imgur.com/UPDXVZO.jpeg",
-    caption: `
-┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
 ┣⋆⃟ۣۜ᭪➣ 𖡦 𝐁𝐑𝐈𝐍𝐂𝐀𝐃𝐄𝐈𝐑𝐀𝐒 【💫】
 ┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
 ╎
@@ -447,25 +506,19 @@ const menus = {
 
 ✰ۣۜۜ͜͡BILLIE✿
 
-✰✰✰✰✰`
+✰✰✰✰✰  `
   },
-
   "+menulogos": {
-    image: "https://i.imgur.com/ZP39eB8.jpeg",
-    caption: `
-off por enquanto`
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `off por enquanto`
   },
-
   "+menuhentai": {
-    image: "https://i.imgur.com/x7w8fZ4.jpeg",
-    caption: `
-off por enquanto`
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `off por enquanto`
   },
-
   "+menuanime": {
-    image: "https://i.imgur.com/bgnA6Ma.jpeg",
-    caption: `
-┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
 ┣⋆⃟ۣۜ᭪➣ 𖡦 𝐀𝐍𝐈𝐌𝐄𝐒 【💫】
 ┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
 ╎
@@ -507,13 +560,11 @@ off por enquanto`
 
 ✰ۣۜۜ͜͡BILLIE ✿
 
-✰✰✰✰✰ `
+✰✰✰✰✰`
   },
-
   "+menudono": {
-    image: "https://i.imgur.com/nRYyL6m.jpeg",
-    caption: `
-┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
 ┣⋆⃟ۣۜ᭪➣ 𖡦 𝐃𝐎𝐍𝐎  【👑】
 ┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
 ╎
@@ -637,11 +688,9 @@ off por enquanto`
 
 ✰ۣۜۜ͜͡BILLIE ✿`
   },
-
   "+menuadm": {
-    image: "https://i.imgur.com/tZ65lcy.jpeg",
-    caption: `
-┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `┏═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┓
 ┣⋆⃟ۣۜ᭪➣ 𖡦 𝐀𝐃𝐌𝐒 【⛩️】
 ┗═•✭･ﾟ✧*･ﾟ| ⊱✿⊰ |*✭˚･ﾟ✧･ﾟ•═┛‎
 ╎
@@ -785,41 +834,16 @@ off por enquanto`
 
 ✰ۣۜۜ͜͡BILLIE ✿
 
-✰✰✰✰✰
-`
+✰✰✰✰✰   `
   },
-
   "+menurpg": {
-    image: "https://i.imgur.com/KaFiOhF.jpeg",
-    caption: `
-off por enquanto
-`
+    image: "https://files.catbox.moe/mdeebk.jpg",
+    caption: `off por enquanto`
   }
 };
 
+const cooldowns = new Map();
 
-// ✅ Carrega lista premium
-function carregarPremium() {
-  const caminho = path.join(__dirname, "assets/users/premium.json");
-  try {
-    const data = fs.readFileSync(caminho, "utf8");
-    return JSON.parse(data); // Ex: ["5511999999999@s.whatsapp.net"]
-  } catch (err) {
-    console.error("❌ Erro ao carregar premium.json:", err.message);
-    return [];
-  }
-}
-
-// ✅ Preenche variáveis nas mensagens
-function preencherTags(template, dados) {
-  return template
-    .replace(/{nome}/g, dados.nome)
-    .replace(/{numero}/g, dados.numero)
-    .replace(/{hora}/g, dados.hora)
-    .replace(/{premium}/g, dados.statusPremium);
-}
-
-// ✅ Espera o socket global ser carregado
 function esperarSocket(retries = 30) {
   const delay = 1000;
 
@@ -827,13 +851,13 @@ function esperarSocket(retries = 30) {
     const sock = globalThis.sock;
     if (!sock || typeof sock.ev?.on !== "function" || typeof sock.sendMessage !== "function") {
       if (retries-- <= 0) {
-        console.log("❌ Socket não detectado. Abortando.");
+        console.log("❌ Não foi possível detectar o socket. Encerrando interceptador.");
         clearInterval(intervalo);
       }
       return;
     }
 
-    console.log("✅ Socket detectado. Injetando menus...");
+    console.log("✅ Socket encontrado. Injetando menus...");
 
     sock.ev.on("messages.upsert", async ({ messages }) => {
       const msg = messages[0];
@@ -845,46 +869,38 @@ function esperarSocket(retries = 30) {
         msg.message?.imageMessage?.caption ||
         msg.message?.videoMessage?.caption || "";
 
-      const txt = body.trim().toLowerCase();
-      const jid = msg.key.participant || msg.key.remoteJid;
-      const nome = msg.pushName || "Usuário";
-      const numero = jid.split("@")[0];
+      if (!body) return;
 
-      const hora = new Date().toLocaleTimeString("pt-BR", {
-        timeZone: "America/Sao_Paulo"
-      });
+      const txt = body.trim().toLowerCase();
+      if (!menu[txt]) return;
+
+      const jid = msg.key.remoteJid;
+      if (cooldowns.has(jid)) return;
+
+      cooldowns.set(jid, true);
+      setTimeout(() => cooldowns.delete(jid), 5000); // 5 segundos de espera por chat
+
+      console.log(`📩 Menu reconhecido: ${txt}`);
+
+      const numero = jid.split("@")[0];
+      const nome = msg.pushName || "Usuário";
+      const hora = new Date().toLocaleTimeString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
       const premiumList = carregarPremium();
       const statusPremium = premiumList.includes(jid) ? "✅ Sim" : "❌ Não";
 
       const dados = { nome, numero, hora, statusPremium };
+      const captionFinal = preencherTags(menu[txt].caption, dados);
 
-      // ✅ Se for um menu conhecido
-      if (menus[txt]) {
-        const menu = menus[txt];
-        const caption = preencherTags(menu.caption, dados);
-
-        await sock.sendMessage(msg.key.remoteJid, {
-          image: { url: menu.image },
-          caption: caption.trim(),
-          jpegThumbnail: null
+      try {
+        await new Promise((r) => setTimeout(r, 1500)); // Delay para evitar rate limit
+        await sock.sendMessage(jid, {
+          image: { url: menu[txt].image },
+          caption: captionFinal.trim(),
         }, { quoted: msg });
-
-        return; // ⛔ Impede que o index trate esse comando
+      } catch (err) {
+        console.error("❌ Erro ao enviar menu:", err.message);
       }
-
-      // ✅ Comandos manuais extras
-      switch (txt) {
-        case "+ping":
-          await sock.sendMessage(msg.key.remoteJid, {
-            text: "🏓 Pong!",
-          }, { quoted: msg });
-          return;
-
-        // ➕ Adicione outros comandos aqui
-      }
-
-      // ⚠️ Nenhum comando tratado aqui? O index vai cuidar disso (e pode dar "comando não encontrado")
     });
 
     clearInterval(intervalo);
